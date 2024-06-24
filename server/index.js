@@ -22,10 +22,10 @@ database.connect();
 //middlewares
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors()); 
+app.use(cors());
 
 app.use(
-	fileUpload({ 
+	fileUpload({
 		useTempFiles: true,                     //this middleware is for file upload in local media;
 		tempFileDir: "/tmp",
 	})
@@ -49,7 +49,7 @@ app.get("/", (req, res) => {
 	});
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
 	console.log(`App is running at ${PORT}`);
 }).on('error', (err) => {
 	console.error('Failed to start server:', err);
