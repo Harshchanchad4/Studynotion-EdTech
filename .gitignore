@@ -1,12 +1,16 @@
-# Ignore environment variable files
+# .gitignore in root directory
+
+# Ignore .env file in root
 .env
 
-# Ignore node_modules directory
+# Ignore node_modules directory in root
 node_modules/
 
+# Ignore .env file in src directory
+src/.env
 
-node_modules
-.env
+# Ignore node_modules directory in src directory
+src/node_modules/
 
 
 
