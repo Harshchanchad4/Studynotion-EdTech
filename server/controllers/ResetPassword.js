@@ -7,25 +7,25 @@ const crypto = require("crypto");
 //resetPasswordToken :- it generate token and send URL with Token to the user;
 const resetPasswordToken = async (req, res) => {
     try {
-        const email = req.body.email;                              //get email from req body
-        const user = await User.findOne({email: email});           //check user for this email,find user which email is matched to this email;
-        if(!user) {                                                //if there is no any user for this email;
+        const email = req.body.email;                              
+        const user = await User.findOne({email: email});           
+        if(!user) {                                                
             return res.json({success:false, message:'Your Email is not registered'});
         }
        
-        const token = crypto.randomBytes(20).toString("hex");                          //generate token and we add expiration time in that token and then we add that token
-        const updatedDetails = await User.findOneAndUpdate(          // URL so the URL which will be sent to user to reset password will expire after certain time;
+        const token = crypto.randomBytes(20).toString("hex");                        
+        const updatedDetails = await User.findOneAndUpdate(          
                                         {email:email},
                                         {
                                             token:token,
                                             resetPasswordExpires: Date.now() + 5*60*60*1000,
                                         },
-                                        {new:true});                  // {new:true} added because it return updated object so updatedDetails contain updated details;
+                                        {new:true});                 
         
-        const url = `http://localhost:5173/update-password/${token}`                              //create url
+        const url = `http://localhost:5173/update-password/${token}`                              
         await mailSender(email, "Password Reset Link",`Your Link for email verification is ${url}. Please click this url to reset your password.`);   //send mail containing the url
                          
-        return res.json({                                                                         //return response
+        return res.json({                                                                         
             success:true,
             message:'Email sent successfully, please check email and change pwd',
         });
@@ -44,18 +44,18 @@ const resetPasswordToken = async (req, res) => {
 const resetPassword = async (req, res) => {
     try {
         const {password, confirmPassword, token} = req.body; 
-                          //data fetch
+                          
 
 
-        if(password !== confirmPassword) {                                    //validation
+        if(password !== confirmPassword) {                                    
             return res.json({ success:false,  message:'Password not matching',}); 
         }
        
         const userDetails = await User.findOne({token: token});
-                     //get userdetails from db using token
+
                      console.log("USERDetails" , userDetails );
 ;
-        if(!userDetails) {                                                 //if no entry - invalid token
+        if(!userDetails) {                                                 
             return res.json({ success:false,   message:'Token is invalid',  });
         }
 
@@ -68,12 +68,11 @@ const resetPassword = async (req, res) => {
             });
         } 
          
-        const encryptedPassword = await bcrypt.hash(password, 10);           //hash password
+        const encryptedPassword = await bcrypt.hash(password, 10);           
 
-        //password update IN DB;
         await User.findOneAndUpdate({token:token}, {password:encryptedPassword}, {new:true}, );
         
-        return res.status(200).json({                             //return response
+        return res.status(200).json({                             
             success:true,
             message:'Password reset successful',
         });

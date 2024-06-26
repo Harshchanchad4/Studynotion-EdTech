@@ -34,7 +34,6 @@ exports.enrollStudents = async(req,res) => {
             courseID:courseId,
             userId:userId,
             completedVideos: [],
-            date : Date.now
         })
 
         //find the student and add the course to their list of enrolledCOurses
@@ -46,6 +45,7 @@ exports.enrollStudents = async(req,res) => {
         return res.status(200).json({
             success : true,
             message : `Student Enrolled Successfully into ${enrolledCourse.courseName}`,
+            courseProgress
         })
 
     }

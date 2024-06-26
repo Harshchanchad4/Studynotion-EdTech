@@ -35,16 +35,16 @@ const createSection = async (req, res) => {
 
 const updateSection = async (req,res) => {
     try {
-        const {sectionName, sectionId , courseId} = req.body;                  //data input
-        if(!sectionName || !sectionId) {                                      //data validation
+        const {sectionName, sectionId , courseId} = req.body;                 
+        if(!sectionName || !sectionId) {                                      
             return res.status(400).json({success:false,  message:'Missing Properties', });
         }
         
-        const section = await Section.findByIdAndUpdate(sectionId, {sectionName}, {new:true});            //it find section that id is matched with sectionid and in that section {sectionName} is updated;
-                                                                                                         // await Section.findByIdAndUpdate(sectionId, {sectionName}, {new:true}); agar hm itna bhi likhe to koi effect nhi padega;
+        const section = await Section.findByIdAndUpdate(sectionId, {sectionName}, {new:true});           
+                                                                                                         
         const course = await Course.findById(courseId).populate({path:"courseContent" , populate:{path:"subSection"} , }).exec();
        
-       return res.status(200).json({                                            //return res
+       return res.status(200).json({                                            
             success:true,
             data:course,
             message:'Section Updated Successfully',
@@ -71,14 +71,12 @@ const deleteSection = async (req, res) => {
 			return res.status(404).json({success:false, message:"Section not Found",})	 
 		}
 
-		//delete sub section
 		await SubSection.deleteMany({_id: {$in: section.subSection}});
 
 		await Section.findByIdAndDelete(sectionId);
 
-		//find the updated course and return 
-		const course = await Course.findById(courseId).populate({                               //here there is no use of const course , its only store updated course;
-			path:"courseContent",                                                               // if you also write without  "const course = " then it also work;
+		const course = await Course.findById(courseId).populate({                               
+			path:"courseContent",                                                               
 			populate: {
 				path: "subSection"
 			}
