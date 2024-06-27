@@ -58,12 +58,16 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }){
             Rs. {CurrentPrice}
           </div>
           <div className="flex flex-col gap-4">
+            
             <button className="yellowButton"  onClick = {user && course?.studentsEnrolled.includes(user?._id) ? () => navigate("/dashboard/enrolled-courses") : handleBuyCourse} >
+
               {user && course?.studentsEnrolled.includes(user?._id) ? "Go To Course" : "Buy Now"}
             </button>
             {(!user || !course?.studentsEnrolled.includes(user?._id)) && (
               <button onClick={handleAddToCart} className="blackButton"> Add to Cart </button>
             )}
+
+
           </div>
           <div>
             <p className="pb-3 pt-6 text-center text-sm text-richblack-25">  30-Day Money-Back Guarantee </p>

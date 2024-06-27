@@ -16,6 +16,14 @@ import ReviewSlider from '../components/common/ReviewSlider';
 const Home = () => {
     return (
         <div>
+
+            {/* DEMO */}
+            
+                {/* <h1 className='text-2xl text-white font-semibold text-center mt-10'>
+                    Welcome To Studynotion ,To Check Website Please Login with Demo Account !!
+                </h1>
+             */}
+
             {/* section 1 */}
             <div className='group relative min-h-screen mx-auto flex flex-col w-11/12 items-center 
             text-white justify-between '>
