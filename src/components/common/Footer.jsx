@@ -130,7 +130,7 @@ const Footer = () => {
                                 <div key={i} className="flex flex-col gap-2">
 
                                     <div className="text-richblack-100">{elem.title}</div>
-                                    <div className="text-richblack-400">
+                                    <div className="text-richblack-400 ">
                                         {
                                             elem.links.map((linkelem, i) => {
                                                 return (

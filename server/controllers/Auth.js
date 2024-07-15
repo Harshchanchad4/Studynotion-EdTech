@@ -107,7 +107,7 @@ const login = async (req, res) => {
             });
         }
         
-        if(await bcrypt.compare(password, user.password)){                   
+        if(await bcrypt.compare(password, user.password)){   
             const payload = {                                                
                 email: user.email,
                 id: user._id,

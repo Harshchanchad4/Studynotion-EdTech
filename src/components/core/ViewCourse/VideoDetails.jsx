@@ -113,7 +113,7 @@ const VideoDetails = () => {
       {!videoData ? (
         <img src={previewSource}  alt="Preview" className="h-full w-full rounded-md object-cover" />
       ) : (
-        <Player ref={playerRef}  aspectRatio="16:9" playsInline onEnded={() => setVideoEnded(true)} src={videoData?.videoUrl} >
+        <Player ref={playerRef} className="mt-10 ml-10"  aspectRatio="16:9" playsInline onEnded={() => setVideoEnded(true)} src={videoData?.videoUrl} >
           <BigPlayButton position="center" />
           {/* Render When Video Ends */}
           {videoEnded && (
@@ -143,8 +143,8 @@ const VideoDetails = () => {
         </Player>
       )}
 
-      <h1 className="mt-4 text-3xl font-semibold">{videoData?.title}</h1>
-      <p className="pt-2 pb-6">{videoData?.description}</p>
+      <h1 className="mt-4 ml-10  text-3xl font-semibold">{videoData?.title}</h1>
+      <p className="pt-2 ml-10 pb-6">{videoData?.description}</p>
 
     </div>
   
