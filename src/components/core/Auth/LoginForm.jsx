@@ -52,12 +52,12 @@ function LoginForm() {
         <button className='bg-yellow-50 rounded-[8px] font-medium text-richblack-900 px-[12px] py-[8px] mt-6'> Sign In </button>
 
       </form>
-      {/* <div className="text-white text-xl  mt-10">
+      <div className="text-white text-xl  mt-10">
         <h1 className="mb-5 font-semibold">Login With Demo Account : </h1>
         <span className="font-semibold">Email :  <p className="font-light inline"> chanchadharsh4@gmail.com</p></span>
         <div className="mb-1"></div>
         <span className="font-semibold">Password :  <p className="font-light inline"> 12345678</p>  </span>
-      </div> */}
+      </div>
     </div> 
 
   )

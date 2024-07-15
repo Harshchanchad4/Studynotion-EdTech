@@ -58,20 +58,22 @@ const Navbar = () => {
 
     return (
         <div className='flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 '>
+
+            <div className='sm:hidden block relative mr-2 px-2'>
+
+
+
+                {token !== null && <Menu />}
+
+
+            </div>
+
             <div className='flex w-11/12 max-w-maxContent items-center justify-between'>
+
+
+
+
                 <div className='flex justify-center items-center gap-3 text-white'>
-
-                    <div className='sm:hidden block relative bg-black mr-2'>
-
-                        
-                        
-                           {token !== null && <Menu />}
-                         
-                        
-                    </div>
-
-
-
 
                     {/* image  */}
                     <Link to="/" >
@@ -156,7 +158,7 @@ const Navbar = () => {
                     {
                         token === null && (
                             <Link to="/login">
-                                <button className='border border-richblack-700 bg-richblack-800 px-[12px] sm:py-[8px] py-[4px] text-richblack-100 rounded-md '>
+                                <button className='border sm:text-xl text-sm border-richblack-700 bg-richblack-800 px-[6px] sm:px-[10px] sm:py-[4px] py-[4px] text-richblack-100 rounded-md '>
                                     Log in
                                 </button>
                             </Link>
@@ -165,7 +167,7 @@ const Navbar = () => {
                     {
                         token === null && (
                             <Link to="/signup">
-                                <button className='border border-richblack-700 bg-richblack-800 px-[12px] sm:py-[8px] py-[4px] text-richblack-100 rounded-md '>
+                                <button className='border text-sm sm:text-xl border-richblack-700 bg-richblack-800 px-[6px] sm:px-[10px] sm:py-[4px] py-[4px] text-richblack-100 rounded-md '>
                                     Sign up
                                 </button>
                             </Link>

@@ -60,13 +60,11 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
               <div className="mx-5 flex flex-col items-start justify-between gap-2 gap-y-4 border-b border-richblack-600 py-5 text-lg font-bold text-richblack-25">
 
                 <div className="flex w-full items-center justify-between">
-                  <div
-                    onClick={clickHandler1}
-                    title="back"
-                    className="flex w-[35px] items-center justify-centerborder rounded-md border-richblack-700 p-1 h-10 justify-center text-white hover:scale-90 cursor-pointer"
-                  >
-                    <AiOutlineMenuFold size={30} />
-
+                  <div className="flex w-[40%] items-center text-xl text-white gap-2 cursor-pointer" onClick={clickHandler1}>
+                    <div title="back" className="flex h-[35px] w-[35px] items-center justify-center rounded-full bg-richblack-100 p-1 text-richblack-700 hover:scale-90"  >
+                      <IoIosArrowBack size={28} />
+                    </div>
+                    <p>Back</p>
                   </div>
                   <IconBtn text="Add Review" customClasses="ml-auto" onclick={() => setReviewModal(true)} />
                 </div>
@@ -119,20 +117,15 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
                   ))}
               </div>
 
-              <div className="flex w-full items-center text-xl text-white gap-2 absolute left-4 bottom-4 cursor-pointer" onClick={() => { navigate(`/dashboard/enrolled-courses`) }}>
-                <div  title="back" className="flex h-[35px] w-[35px] items-center justify-center rounded-full bg-richblack-100 p-1 text-richblack-700 hover:scale-90"  >
-                  <IoIosArrowBack size={30} />
-                </div>
-                <p>Back</p>
-              </div>
+
 
             </div>
 
             <div className={`${style2}`}
               onClick={clickHandler2}>
-              <button className="mt-4 border rounded-md border-richblack-700  text-white h-10 w-[80%] ml-7 cursor-pointer flex justify-center items-center gap-2 sm:text-xl text-md p-1 hover:scale-95" title="course" >
+              <button className="mt-4 border rounded-md border-richblack-700  text-white h-8 w-[60%] sm:w-[80%] p-1 ml-7 cursor-pointer flex justify-center items-center gap-2 sm:text-xl text-md hover:scale-95" title="course" >
 
-                <AiOutlineMenuUnfold />
+                <AiOutlineMenuUnfold size={28} />
                 <p className="sm:block hidden" >Course</p>
               </button>
 
