@@ -53,11 +53,17 @@ function LoginForm() {
 
       </form>
       <div className="text-white text-xl  mt-10">
-        <h1 className="mb-5 font-semibold">Login With Demo Account : </h1>
+        <h1 className="mb-5 font-semibold">Login With Student Demo Account : </h1>
         <span className="font-semibold">Email :  <p className="font-light inline"> chanchadharsh4@gmail.com</p></span>
         <div className="mb-1"></div>
         <span className="font-semibold">Password :  <p className="font-light inline"> 12345678</p>  </span>
       </div>
+      {/* <div className="text-white text-xl  mt-10">
+        <h1 className="mb-5 font-semibold">Login With Instructor Demo Account : </h1>
+        <span className="font-semibold">Email :  <p className="font-light inline"> harshchanchad1753@gmail.com</p></span>
+        <div className="mb-1"></div>
+        <span className="font-semibold">Password :  <p className="font-light inline"> 12345678</p>  </span>
+      </div> */}
     </div> 
 
   )

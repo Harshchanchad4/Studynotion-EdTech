@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, matchPath } from 'react-router-dom'
 import logo from "../../assets/Logo/Logo-Full-Light.png"
+import logoSmall from "../../assets/Logo/Logo-Small-Light.png"
 import { NavbarLinks } from "../../data/navbar-links"
 import { useLocation } from 'react-router-dom'
 import { useSelector } from "react-redux"
@@ -59,11 +60,18 @@ const Navbar = () => {
     return (
         <div className='flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 '>
 
-            <div className='sm:hidden block relative mr-2 px-2'>
+            <div className='sm:hidden flex gap-2 relative mr-3 px-2 border-richblack-200 border rounded-full cursor-pointer ml-[2px] '>
 
 
 
-                {token !== null && <Menu />}
+                <div className='justify-center items-center gap-3 text-white flex sm:hidden'>
+
+                    {/* image  */}
+                    <Link to="/" >
+                        <img src={logoSmall} alt="Studynotion logo" width={30} height={29} loading='lazy' />
+                    </Link>
+                </div>
+                { <Menu />}
 
 
             </div>
@@ -73,13 +81,14 @@ const Navbar = () => {
 
 
 
-                <div className='flex justify-center items-center gap-3 text-white'>
+                <div className='justify-center items-center gap-3 text-white hidden sm:flex'>
 
                     {/* image  */}
                     <Link to="/" >
                         <img src={logo} alt="Studynotion logo" width={160} height={42} loading='lazy' />
                     </Link>
                 </div>
+
 
                 {/* nav links */}
                 <nav className="hidden md:block">                                                                    {/* Navigation links */}
@@ -96,6 +105,7 @@ const Navbar = () => {
                                                 <p> {link.title} </p>  <BsChevronDown />                                   {/*   "Catalog \/"   */}
 
                                                 <div className="invisible absolute left-[50%] top-[50%] z-[1000] flex w-[200px] translate-x-[-50%] translate-y-[3em] flex-col rounded-lg bg-richblack-5 p-4 text-richblack-900 opacity-0 transition-all duration-150 group-hover:visible group-hover:translate-y-[1.65em] group-hover:opacity-100 lg:w-[300px]">
+
                                                     <div className="absolute left-[50%] top-0 -z-10 h-6 w-6 translate-x-[80%] translate-y-[-40%] rotate-45 select-none rounded bg-richblack-5"></div>
                                                     {
                                                         loading ? (<p className="text-center"> Loading... </p>) : subLinks?.length ? (
@@ -132,6 +142,45 @@ const Navbar = () => {
                     </ul>
                 </nav>
 
+                {
+
+                    NavbarLinks.map((link, index) => (
+                        link.title === "Catalog" && (
+
+                            <>
+                                <div className={`group relative flex cursor-pointer items-center gap-1 md:hidden ${matchRoute("/catalog/:catalogName") ? "text-yellow-25" : "text-richblack-25"}`} >
+                                    <p> {link.title} </p>  <BsChevronDown />                                   {/*   "Catalog \/"   */}
+
+                                    <div className="invisible absolute left-[50%] top-[50%] z-[1000] flex w-[200px] translate-x-[-50%] translate-y-[3em] flex-col rounded-lg bg-richblack-5 p-4 text-richblack-900 opacity-0 transition-all duration-150 group-hover:visible group-hover:translate-y-[1.65em] group-hover:opacity-100 lg:w-[300px]">
+
+                                        <div className="absolute left-[50%] top-0 -z-10 h-6 w-6 translate-x-[80%] translate-y-[-40%] rotate-45 select-none rounded bg-richblack-5"></div>
+                                        {
+                                            loading ? (<p className="text-center"> Loading... </p>) : subLinks?.length ? (
+
+                                                <>
+                                                    {
+
+                                                        // subLinks?.filter((subLink) => subLink?.courses.length > 0)?.map((subLink, i) => (
+                                                        subLinks?.map((subLink, i) => (
+
+                                                            <Link to={`/catalog/${subLink.name.split(" ").join("-").toLowerCase()}`} className="rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-50" key={i} >
+                                                                <p>{subLink.name}</p>
+                                                            </Link>
+                                                        ))
+                                                    }
+                                                </>
+                                            ) : (<p className="text-center">No Courses Found</p>)
+                                        }
+                                    </div>
+                                </div>
+                            </>
+
+                        )
+                    ))
+
+
+
+                }
 
                 {/* login signup dashbord */}
                 <div className='flex gap-x-4 items-center text-white text-lg justify-center'>

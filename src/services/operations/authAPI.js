@@ -71,7 +71,6 @@ export function signUp(accountType, firstName, lastName, email, password, confir
 
 export function login(email, password, navigate) {
   return async (dispatch) => {
-    console.log("i am indie login ")
     const toastId = toast.loading("Loading...")
     dispatch(setLoading(true))
     try {
