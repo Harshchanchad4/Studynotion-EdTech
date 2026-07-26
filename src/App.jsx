@@ -29,6 +29,7 @@ import Instructor from './components/core/Dashboard/Instructor.jsx'
 import ViewCourse from "./pages/ViewCourse.jsx"
 import VideoDetails from './components/core/ViewCourse/VideoDetails.jsx'
 import PurchaseHistory from './components/core/Dashboard/PurchaseHistory.jsx'
+import { ChatWidget } from './components/AIChat'
 
 
 
@@ -145,6 +146,7 @@ function App() {
 
 
       </Routes>
+      <ChatWidget />
     </div>
   )
 }
