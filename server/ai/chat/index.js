@@ -28,29 +28,43 @@ async function chat(question) {
   // Step 2: Build prompt
   const { system, user } = buildPrompt(question, docs);
 
-  // Step 3: Generate response via HF
-  // Combine system + user into a single message for broader provider compatibility.
-  // Truncate context to stay within token limits of free-tier models.
-  const combinedPrompt = `${system}\n\n${user}`.slice(0, 3500);
+  // Step 3: Generate response via HF.
+  // Combine instructions + context into a single user message. Some models (e.g. Gemma)
+  // reject a separate "system" role, so this keeps us compatible across providers.
+  // Cap only the retrieved context, and keep the budget generous so nothing key is cut.
+  const MAX_CONTEXT_CHARS = 12000;
+  const cappedUser =
+    user.length > MAX_CONTEXT_CHARS ? user.slice(0, MAX_CONTEXT_CHARS) : user;
+  const combinedPrompt = `${system}\n\n${cappedUser}`;
 
   const response = await hf.chatCompletion({
     model: config.huggingface.llmModel,
     provider: config.huggingface.llmProvider,
     messages: [{ role: "user", content: combinedPrompt }],
-    max_tokens: 512,
-    temperature: 0.3,
+    max_tokens: 800,
+    temperature: 0.2,
   });
 
   const answer =
     response.choices?.[0]?.message?.content?.trim() ||
     "Sorry, I couldn't generate a response. Please try again.";
 
-  // Step 4: Return answer with source metadata
-  const sources = docs.map((d) => ({
-    type: d.payload.type,
-    name: d.payload.name || d.payload.courseName || "N/A",
-    score: parseFloat(d.score.toFixed(3)),
-  }));
+  // Step 4: Return source metadata — drop "Unknown"/"N/A" and dedupe by type+name,
+  // keeping the highest-scoring occurrence of each.
+  const seen = new Map();
+  for (const d of docs) {
+    const name = d.payload.name || d.payload.courseName || "N/A";
+    if (name === "N/A" || /unknown/i.test(name)) continue;
+    const key = name.trim().toLowerCase();
+    if (!seen.has(key) || d.score > seen.get(key).score) {
+      seen.set(key, {
+        type: d.payload.type,
+        name,
+        score: parseFloat(d.score.toFixed(3)),
+      });
+    }
+  }
+  const sources = Array.from(seen.values()).sort((a, b) => b.score - a.score);
 
   return { answer, sources };
 }

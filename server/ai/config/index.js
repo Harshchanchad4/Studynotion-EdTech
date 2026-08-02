@@ -3,7 +3,7 @@ require("dotenv").config();
 module.exports = {
   huggingface: {
     apiKey: process.env.HF_API_KEY,
-    llmModel: process.env.HF_LLM_MODEL || "google/gemma-2-2b-it",
+    llmModel: process.env.HF_LLM_MODEL || "Qwen/Qwen2.5-7B-Instruct",
     llmProvider: process.env.HF_LLM_PROVIDER || "featherless-ai",
     embeddingModel: process.env.HF_EMBEDDING_MODEL || "BAAI/bge-m3",
   },
@@ -14,7 +14,7 @@ module.exports = {
     vectorSize: 1024, // bge-m3 outputs 1024-dim vectors
   },
   retrieval: {
-    topK: 5,
+    topK: 8,
     scoreThreshold: 0.3,
   },
 };
