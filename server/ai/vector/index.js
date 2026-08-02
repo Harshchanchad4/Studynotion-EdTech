@@ -1,7 +1,10 @@
 const { QdrantClient } = require("@qdrant/js-client-rest");
 const config = require("../config");
 
-const client = new QdrantClient({ url: config.qdrant.url });
+const client = new QdrantClient({
+  url: config.qdrant.url,
+  apiKey: config.qdrant.apiKey, // ignored when undefined (local dev)
+});
 const COLLECTION = config.qdrant.collectionName;
 
 /**

@@ -9,6 +9,7 @@ module.exports = {
   },
   qdrant: {
     url: process.env.QDRANT_URL || "http://localhost:6333",
+    apiKey: process.env.QDRANT_API_KEY, // required for Qdrant Cloud; undefined for local
     collectionName: process.env.QDRANT_COLLECTION || "studynotion",
     vectorSize: 1024, // bge-m3 outputs 1024-dim vectors
   },
